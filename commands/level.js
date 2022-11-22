@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const fs = require('node:fs');
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
         }
 
         let dir = '././other/levels.json';
-        fs.readFile(dir, (err, data) => {
+        fs.readFile(dir, async (err, data) => {
             // show the user their level and xp
             if (err) throw err;
             let xp = JSON.parse(data);
@@ -27,8 +27,13 @@ module.exports = {
             }
             let curxp = xp[user.id].xp;
             let curlvl = xp[user.id].level;
-            let maxxp = 100;
-            interaction.reply({ content: `${user} are currently level ${curlvl} and have ${curxp}/${maxxp} xp.`, ephemeral: true });
-        }); 
+            let nxtLvl = curlvl * 70;
+
+            var embed = new EmbedBuilder()
+            .setTitle(`<a:lvlup:1044325953431678986>Level`)
+            .setDescription(`You are level ${curlvl} and have ${curxp}/${nxtLvl} xp!`)
+            .setColor("Aqua")
+            interaction.reply({ embeds: [embed] })
+        });
 	},
 };
