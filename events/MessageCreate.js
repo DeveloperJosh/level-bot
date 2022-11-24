@@ -26,6 +26,9 @@ module.exports = {
             if (locked.includes(message.author.id)) return;
 
             if (curxp >= nxtLvl) {
+                if (curlvl === 100) {
+                    return;
+                }
                 curlvl += 1;
                 curxp = 0;
                 xp[message.author.id].level = curlvl;

@@ -14,7 +14,7 @@ module.exports = {
             user = interaction.user;
         }
 
-        let dir = '././other/levels.json';
+        let dir = './other/levels.json';
         fs.readFile(dir, async (err, data) => {
             // show the user their level and xp
             if (err) throw err;
